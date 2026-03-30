@@ -4,7 +4,7 @@
 #include <vector>
 
 
-// Простой макрос для тестов
+
 #define ASSERT_TRUE(cond) if (!(cond)) { std::cerr << "Test failed: " << #cond << " at line " << __LINE__ << std::endl; exit(1); }
 #define ASSERT_FALSE(cond) ASSERT_TRUE(!(cond))
 
@@ -25,16 +25,13 @@ void test_copy_move() {
     bitset bs1;
     bs1.set(100, true);
 
-    // Тест копирования
     bitset bs2 = bs1;
     ASSERT_TRUE(bs2.test(100));
     bs1.set(100, false);
-    ASSERT_TRUE(bs2.test(100)); // Глубокое копирование: bs2 не изменился
-
-    // Тест перемещения
+    ASSERT_TRUE(bs2.test(100));
     bitset bs3 = std::move(bs2);
     ASSERT_TRUE(bs3.test(100));
-    ASSERT_TRUE(bs2.empty()); // Источник в пустом состоянии
+    ASSERT_TRUE(bs2.empty());
 }
 
 void test_set_logic() {
@@ -42,11 +39,9 @@ void test_set_logic() {
     a.set(1, true); a.set(3, true);
     b.set(3, true); b.set(5, true);
 
-    // bitset res_union = a.union_with(b);
     bitset res_union = a+b;
     ASSERT_TRUE(res_union.test(1) && res_union.test(3) && res_union.test(5));
 
-    // bitset res_inter = a.intersection(b);
     bitset res_inter = a*b;
     ASSERT_TRUE(res_inter.test(3));
     ASSERT_FALSE(res_inter.test(1));
