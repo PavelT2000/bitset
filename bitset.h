@@ -1,22 +1,35 @@
+#pragma once
+#include <cstdint>
+
 class bitset
 {
 private:
-    /* data */
+    uint64_t * data;
+    size_t capacity_bits;
+
+    size_t units_count() const ;
+    void resize(size_t new_bits_count);
+
+
 public:
-    bitset(/* args */);
+    bitset();
     ~bitset();
+    explicit bitset(size_t initial_capacity);
+    bitset(const bitset& other);
+    bitset(bitset&& other) noexcept;
+
+    bitset& operator=(bitset other);
+    bitset operator*(bitset other) const;
+    bitset operator+(bitset other) const;
+
     bool test(int index);
-    bool set(int index, bool val);
+    void set(int index, bool val);
     bool empty();
-    int size();
-    bitset union_with(bitset set);
-    bitset intersection(bitset set);
+    int size() const;
+    bitset union_with(const bitset& set) const;
+    bitset intersection(const bitset& set) const;
+    bool is_subnet(const bitset& set) const;
+    void clear();
 };
 
-bitset::bitset(/* args */)
-{
-}
 
-bitset::~bitset()
-{
-}
