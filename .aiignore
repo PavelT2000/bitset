@@ -1,0 +1,15 @@
+.git/
+.vscode/
+*.o
+*.obj
+*.exe
+*.out
+*.log
+*.tmp
+build/
+bin/
+obj/
+venv/
+node_modules/
+__pycache__/
+.DS_Store
